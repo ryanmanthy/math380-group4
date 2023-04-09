@@ -5,7 +5,7 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 # Load data from Kaggle Ebola dataset
-df = pd.read_csv("/sir-model/data-sets/ebola_2014_2016_clean.csv")
+df = pd.read_csv("\ebola_2014_2016_clean.csv")
 
 # Define initial conditions
 I0 = df["Cumulative_cases"].iloc[0]
