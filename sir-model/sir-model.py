@@ -12,6 +12,7 @@ R0 = df["Cumulative_deaths"].iloc[0]
 S0 = 1 - I0 - R0
 y0 = [S0, I0, R0]
 
+
 # Define time points
 t = np.linspace(0, len(df)-1, len(df))
 
