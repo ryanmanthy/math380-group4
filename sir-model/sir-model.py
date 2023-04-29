@@ -41,3 +41,38 @@ plt.ylabel("Fraction of population")
 plt.title("SIR Model for Ebola Outbreak")
 plt.legend()
 plt.show()
+
+
+# SIR Model Function: Output as a Tuple: {Time, Location, Susceptible, Infected, Recovered}. Function input: current date formatted as XXX
+def SIRModel(date):
+    # Load data from Kaggle Ebola dataset
+    df = pd.read_csv("sir-model/data-sets/ebola_2014_2016_clean.csv")
+    # Define initial conditions
+    I0 = df["Cumulative_cases"].iloc[0]
+    R0 = df["Cumulative_deaths"].iloc[0]
+    S0 = 1 - I0 - R0
+    y0 = [S0, I0, R0]
+
+    # Define time points
+    t = np.linspace(0, len(df) - 1, len(df))
+
+    # Define SIR model
+    def SIR(y, t, N, beta, gamma):
+        S, I, R = y
+        dSdt = -beta * S * I / N
+        dIdt = beta * S * I / N - gamma * I
+        dRdt = gamma * I
+        return dSdt, dIdt, dRdt
+
+    # Define model parameters
+    N = 1  # Total population size
+    beta = 0.5  # Infection rate
+    gamma = 0.1  # Recovery rate
+
+    # Integrate SIR equations over time
+    sol = odeint(SIR, y0, t, args=(N, beta, gamma))
+
+    # Return the tuple of only the current date
+    return (t[date], df["Country"].iloc[date], sol[:, 0][date], sol[:, 1][date], sol[:, 2][date])
+
+# Unit tests for the SIR Model function

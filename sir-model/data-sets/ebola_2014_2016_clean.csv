@@ -1,4 +1,4 @@
-Country,Date,"Cumulative no. of confirmed, probable and suspected cases","Cumulative no. of confirmed, probable and suspected deaths"
+Country,Date,"Cumulative_cases","Cumulative_deaths"
 Guinea,2014-08-29,648.0,430.0
 Nigeria,2014-08-29,19.0,7.0
 Sierra Leone,2014-08-29,1026.0,422.0
